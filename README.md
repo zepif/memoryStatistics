@@ -2,9 +2,7 @@
 
 ## Compile
 
-```
 g++ -std=c++14 --shared -fPIC -rdynamic ./\*.cpp -ldl -o libmemStatistics.so
-```
 
 ## Usage
 
@@ -21,9 +19,14 @@ enum SigMemTrace{
 };
 ```
 
-SigMemTrace_start: Start to do memory statistics
-SigMemTrace_stop: Stop doing memory statistics
-SigMemTrace_clear: Clear all memory statistics
-SigMemTrace_dump: Dump memory statistics
-SigMemTrace_debug: Open debug messages
-SigMemTrace_apped: Work in append mode
+- SigMemTrace_start: Start to do memory statistics
+
+- SigMemTrace_stop: Stop doing memory statistics
+
+- SigMemTrace_clear: Clear all memory statistics
+
+- SigMemTrace_dump: Dump memory statistics
+
+- SigMemTrace_debug: Open debug messages
+
+- SigMemTrace_apped: Work in append mode
