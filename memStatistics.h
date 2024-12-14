@@ -31,12 +31,16 @@ public:
     explicit MemStatistics(size_t size);
     ~MemStatistics();
 
-    // Static methods
+    /************ static area **************/
     static MemStatistics& get();
     static void initMemStatistics(size_t size);
+    
+    // whether statistics is running
+    static bool m_statistics_running;
 
     // Process command
-    [[noreturn]] void procCmd();
+    [[noreturn]] 
+    void procCmd();
 
     // Memory node management
     void addMemNode(void* addr, size_t size);
@@ -49,11 +53,16 @@ public:
     bool m_dump_once;
     bool m_debug_flag;
     bool m_append_modle;
+    // malloc trim
+    bool m_malloc_trim_once;
     bool m_thread_running_flag;
 
     // Static members
-    static bool m_statistics_running;
     static int m_log_fd;
+    static int m_malloc_status_fd;
+    static void *m_malloc_info_fd;
+
+
     static thread_local bool sm_statistics_locking;
     static thread_local pid_t thread_id;
 
