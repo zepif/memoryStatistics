@@ -92,13 +92,20 @@ FUNC_C_X(free, void, (void *ptr)) {
 
 FUNC_C_X(realloc, void *, (void *ptr, size_t size)) {
     void *new_ptr = LIBC_FUNC(realloc(ptr, size));
-    REMOVE_FROM_MEM_STATISTICS(ptr);
-    ADD_TO_MEM_STATISTICS(new_ptr, size);
+    
+    if (new_ptr != nullptr) {
+        REMOVE_FROM_MEM_STATISTICS(ptr);
+        ADD_TO_MEM_STATISTICS(new_ptr, size);
+    } else {
+        REMOVE_FROM_MEM_STATISTICS(ptr);
+        ADD_TO_MEM_STATISTICS(ptr, size);
+    }
+
     return new_ptr;
 }
 
 FUNC_C_X(calloc, void *, (size_t nmemb, size_t size)) {
-    void *new_ptr = LIBC_FUNC(calloc(nmemb, size));
+    void *new_ptr = LIBC_FUNC(calloc(nmemb, size)); 
     ADD_TO_MEM_STATISTICS(new_ptr, size * nmemb);
     return new_ptr;
 }
